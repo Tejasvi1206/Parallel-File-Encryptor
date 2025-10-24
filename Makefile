@@ -32,4 +32,4 @@ $(CRYPTION_TARGET): $(CRYPTION_OBJ)
 clean:
 	rm -f $(MAIN_OBJ) $(CRYPTION_OBJ) $(MAIN_TARGET) $(CRYPTION_TARGET)
 
-.PHONY: clean alls
+.PHONY: clean all
