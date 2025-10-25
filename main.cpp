@@ -1,5 +1,6 @@
 #include <iostream>
 #include <filesystem>
+#include <algorithm>
 #include "./src/app/processes/ProcessManagement.hpp"
 #include "./src/app/processes/Task.hpp"
 
@@ -15,6 +16,7 @@ int main(int argx, char *argv[])
 
     std::cout << "Enter the action (encrypt/decrypt): " << std::endl;
     std::getline(std::cin, action);
+    std::transform(action.begin(), action.end(), action.begin(), ::toupper);
 
     try
     {
