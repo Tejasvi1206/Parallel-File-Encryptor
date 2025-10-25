@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     std::cout << "Enter the directory path: ";
     std::getline(std::cin, directory);
 
-    std::cout << "Enter the action (encrypt/decrypt): ";
+    std::cout << "Enter the action (ENCRYPT/DECRYPT): ";
     std::getline(std::cin, action);
 
     try
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
                     if (f_stream.is_open())
                     {
-                        Action taskAction = (action == "encrypt") ? Action::ENCRYPT : Action::DECRYPT;
+                        Action taskAction = (action == "ENCRYPT") ? Action::ENCRYPT : Action::DECRYPT;
                         auto task = std::make_unique<Task>(std::move(f_stream), taskAction, filePath);
                         processManagement.submitToQueue(std::move(task));
                     }
