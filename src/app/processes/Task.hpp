@@ -1,9 +1,10 @@
+// Task.hpp
 #ifndef TASK_HPP
 #define TASK_HPP
 
-#include <string>
-#include <iostream>
 #include "../fileHandling/IO.hpp"
+#include <fstream>
+#include <string>
 #include <sstream>
 
 enum class Action
@@ -20,7 +21,7 @@ struct Task
 
     Task(std::fstream &&stream, Action act, std::string filePath) : f_stream(std::move(stream)), action(act), filePath(filePath) {}
 
-    std::string toString()
+    std::string toString() const
     {
         std::ostringstream oss;
         oss << filePath << "," << (action == Action::ENCRYPT ? "ENCRYPT" : "DECRYPT");
@@ -35,7 +36,7 @@ struct Task
 
         if (std::getline(iss, filePath, ',') && std::getline(iss, actionStr))
         {
-            Action action = (actionStr == "ENCRYPT" ? Action::ENCRYPT : Action::DECRYPT);
+            Action action = (actionStr == "ENCRYPT") ? Action::ENCRYPT : Action::DECRYPT;
             IO io(filePath);
             std::fstream f_stream = std::move(io.getFileStream());
             if (f_stream.is_open())
@@ -44,12 +45,12 @@ struct Task
             }
             else
             {
-                throw std::runtime_error("failed to open file: " + filePath);
+                throw std::runtime_error("Failed to open file: " + filePath);
             }
         }
         else
         {
-            throw std::runtime_error("invalid task data format");
+            throw std::runtime_error("Invalid task data format");
         }
     }
 };
