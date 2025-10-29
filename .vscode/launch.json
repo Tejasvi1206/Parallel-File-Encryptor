@@ -3,8 +3,7 @@
     "configurations": [
         {
             "name": "Debug encrypt_decrypt",
-            "type": "cppdbg",
-            "miDebuggerPath": "gdb",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/encrypt_decrypt",
             "args": [],
@@ -13,8 +12,7 @@
         },
         {
             "name": "Debug cryption (standalone)",
-            "type": "cppdbg",
-            "miDebuggerPath": "gdb",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/cryption",
             "args": [

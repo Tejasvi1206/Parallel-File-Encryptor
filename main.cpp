@@ -2,6 +2,8 @@
 #include <filesystem>
 #include "./src/app/processes/ProcessManagement.hpp"
 #include "./src/app/processes/Task.hpp"
+#include <ctime>
+#include <iomanip>
 
 namespace fs = std::filesystem;
 
@@ -13,7 +15,7 @@ int main(int argc, char *argv[])
     std::cout << "Enter the directory path: ";
     std::getline(std::cin, directory);
 
-    std::cout << "Enter the action (ENCRYPT/DECRYPT): ";
+    std::cout << "Enter the action (encrypt/decrypt): ";
     std::getline(std::cin, action);
 
     try
@@ -32,8 +34,12 @@ int main(int argc, char *argv[])
 
                     if (f_stream.is_open())
                     {
-                        Action taskAction = (action == "ENCRYPT") ? Action::ENCRYPT : Action::DECRYPT;
+                        Action taskAction = (action == "encrypt") ? Action::ENCRYPT : Action::DECRYPT;
                         auto task = std::make_unique<Task>(std::move(f_stream), taskAction, filePath);
+
+                        std::time_t t = std::time(nullptr);
+                        std::tm *now = std::localtime(&t);
+                        std::cout << "Starting the encryption/decryption at: " << std::put_time(now, "%Y-%m-%d %H:%M:%S") << std::endl;
                         processManagement.submitToQueue(std::move(task));
                     }
                     else
