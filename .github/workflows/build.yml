@@ -1,0 +1,31 @@
+name: C++ Build (Parallel File Encryptor)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install build dependencies
+      run: sudo apt update && sudo apt install -y g++ make
+
+    - name: Build project
+      run: |
+        make clean
+        make -j4
+
+    - name: Verify executable exists
+      run: |
+        if [ ! -f "./encrypt_decrypt" ]; then
+          echo "❌ Build failed — no output binary found!"
+          exit 1
+        fi
+        echo "✅ Build successful!"
