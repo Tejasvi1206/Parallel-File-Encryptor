@@ -1,0 +1,14 @@
+# Build outputs
+*.o
+encrypt_decrypt
+cryption
+
+# Logs and debug files
+*.log
+*.core
+
+# OS-generated files
+.DS_Store
+
+# Shared memory artifacts if generated
+/dev/shm/*
