@@ -1,3 +1,5 @@
+![Build Status](https://github.com/Tejasvi1206/Parallel-File-Encryptor/actions/workflows/build.yml/badge.svg)
+
 # File Encryption/Decryption Tool
 
 This project is a simple command-line based file encryption and decryption tool built in C++.  
