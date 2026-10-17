@@ -7,3 +7,10 @@ cryption
 
 # secret key (copy .env.example to .env and set your own)
 .env
+
+# logs and debug files
+*.log
+*.core
+
+# OS-generated files
+.DS_Store

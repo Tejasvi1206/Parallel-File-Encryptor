@@ -1,3 +1,5 @@
+![Build Status](https://github.com/Tejasvi1206/Parallel-File-Encryptor/actions/workflows/build.yml/badge.svg)
+
 # File Encryption/Decryption Tool
 
 This project is a simple command-line based file encryption and decryption tool built in C++.  
@@ -18,7 +20,10 @@ action — encrypt or decrypt — on each file.
 ## 📌 How to Use
 
 1. Run the compiled program
-2. Enter a valid directory path when prompted
-3. Enter the action:  
-   - `encrypt`  
-   - `decrypt`
+   make clean
+   make
+   ./encrypt_decrypt
+2. Enter the directory path: test
+3. Enter the action (encrypt/decrypt): encrypt
+
+And you are good to go...
