@@ -1,0 +1,9 @@
+# build outputs
+*.o
+*.d
+*.exe
+encrypt_decrypt
+cryption
+
+# secret key (copy .env.example to .env and set your own)
+.env

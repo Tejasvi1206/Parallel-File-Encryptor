@@ -4,24 +4,40 @@
         {
             "name": "Debug encrypt_decrypt",
             "type": "cppdbg",
-            "miDebuggerPath": "gdb",
             "request": "launch",
             "program": "${workspaceFolder}/encrypt_decrypt",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "build",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
         },
         {
             "name": "Debug cryption (standalone)",
             "type": "cppdbg",
-            "miDebuggerPath": "gdb",
             "request": "launch",
             "program": "${workspaceFolder}/cryption",
             "args": [
                 "your_task_data_here"
             ],
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "build",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
         }
     ]
 }

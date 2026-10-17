@@ -19,7 +19,7 @@ struct Task
     std::fstream f_stream;
     Action action;
 
-    Task(std::fstream &&stream, Action act, std::string filePath) : f_stream(std::move(stream)), action(act), filePath(filePath) {}
+    Task(std::fstream &&stream, Action act, std::string filePath) : filePath(filePath), f_stream(std::move(stream)), action(act) {}
 
     std::string toString() const
     {
@@ -30,15 +30,15 @@ struct Task
 
     static Task fromString(const std::string &taskData)
     {
-        std::istringstream iss(taskData);
-        std::string filePath;
-        std::string actionStr;
-
-        if (std::getline(iss, filePath, ',') && std::getline(iss, actionStr))
+        // split on the last comma so file paths containing commas still work
+        size_t sep = taskData.rfind(',');
+        if (sep != std::string::npos)
         {
+            std::string filePath = taskData.substr(0, sep);
+            std::string actionStr = taskData.substr(sep + 1);
             Action action = (actionStr == "ENCRYPT") ? Action::ENCRYPT : Action::DECRYPT;
             IO io(filePath);
-            std::fstream f_stream = std::move(io.getFileStream());
+            std::fstream f_stream = io.getFileStream();
             if (f_stream.is_open())
             {
                 return Task(std::move(f_stream), action, filePath);

@@ -33,7 +33,9 @@ int executeCryption(const std::string &taskData)
         task.f_stream.close();
     }
     std::time_t t = std::time(nullptr);
-    std::tm *now = std::localtime(&t);
-    std::cout << "Exiting the encryption/decryption at: " << std::put_time(now, "%Y-% m - % d % H : % M : % S") << std::endl;
+    std::tm now;
+    localtime_r(&t, &now);
+    std::cout << "Exiting the encryption/decryption at: " << std::put_time(&now, "%Y-%m-%d %H:%M:%S") << std::endl;
+
     return 0;
 }

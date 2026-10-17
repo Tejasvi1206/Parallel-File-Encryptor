@@ -54,5 +54,6 @@
         "__tree": "cpp",
         "list": "cpp",
         "map": "cpp"
-    }
+    },
+    "makefile.configureOnOpen": false
 }
