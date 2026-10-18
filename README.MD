@@ -101,6 +101,30 @@ To restore the files, run it again with the **same directory** and `decrypt`.
 
 ---
 
+## 📊 Benchmark
+
+Encrypting **200 MB** (200 files × 1 MB) on a 12-core machine (Linux on WSL2):
+
+| Mode | Workers | Time | Speedup |
+|---|---|---|---|
+| Sequential | 1 | 1291 s (21.5 min) | 1× |
+| `thread` (default) | 12 threads | 199 s | **6.5×** |
+| `process` (default) | 200 processes | 144–173 s | **7.4–9.0×** |
+| `thread` | 200 threads | 148 s | **8.7×** |
+
+All runs were verified with an encrypt → decrypt round trip: every file matched the original exactly.
+
+**Takeaways**
+
+- Both parallel modes are roughly **7–9× faster** than sequential processing.
+- With the **same number of workers**, threads and processes perform about the same. Each task takes seconds, so the extra cost of `fork()` over creating a thread is negligible.
+- **More workers than cores helps.** The cipher makes a system call for almost every byte, so workers spend a lot of time waiting; extra workers keep the CPU busy in the meantime.
+- It is not 12×, because the work is limited by system calls and disk I/O, not by raw CPU.
+
+> Each configuration was timed once, so expect some run-to-run variation (process mode measured 144 s and 173 s in two runs).
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -136,5 +160,6 @@ This is a learning project focused on **parallel programming** (processes, threa
 - [ ] Process files in blocks instead of byte by byte (faster on large files)
 - [ ] Mark encrypted files so they are not encrypted twice
 - [ ] Limit the number of child processes running at once
-- [ ] Benchmark process mode vs thread mode
+- [x] Benchmark process mode vs thread mode
+- [ ] Use more threads than CPU cores by default, since the work is I/O-bound
 - [ ] Replace the byte shift with real encryption (e.g. AES-256-GCM)
